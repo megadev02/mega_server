@@ -1,0 +1,8 @@
+npm install edge
+npm install edge-sql
+npm install socket.io
+
+
+"socket.io":"0.9.16"
+"edge-sql":"0.1.0"
+"edge":"0.7.12"
