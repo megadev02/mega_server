@@ -2,7 +2,7 @@
 var BaseToSocket = new Object(); //clave:base, value:socket
 var SocketToBase = new Object(); //clave:socket, value:base
 
-var io = require('socket.io').listen(85);
+var io = require('socket.io').listen(84);
 var OficinasDAO = require('./Oficinas').OficinasDAO;
 var TransferenciasDAO = require('./Transferencias').TransferenciasDAO;
 
@@ -12,9 +12,8 @@ io.sockets.on('connection', function(client){
 	var Oficinas = new OficinasDAO();
 
 	client.on('disconnect', function () {
-		var base_disconnect = {'BaseOffline': SocketToBase[client.id]};
-    	//io.sockets.emit('base_offline', base_disconnect); //envia a todos
-    	client.broadcast.emit('base_offline', base_disconnect);
+        console.log('La oficina '+ SocketToBase[client.id] + ' se desconectó');
+    	io.emit('oficinaDesconectada', {'oficinaDesconectada': SocketToBase[client.id]});
     });
 
 	client.on('nameclient', function (name) {
